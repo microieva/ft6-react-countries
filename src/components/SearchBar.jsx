@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const SearchBar = () => {
+const SearchBar = ({filterInput, handleFilterChange}) => {
+    
     return (
         <>
-            <input 
-                id="name" 
-                name="name" 
+            <input
                 type="text"
-            /> 
+                value={filterInput}
+                onChange={handleFilterChange}
+            />
         </>
     )
 }
