@@ -31,43 +31,43 @@ export default function Table({ columns, data }) {
         handleFilterChange={handleFilterChange}
       />
       <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              // <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              <th
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-                className={
-                  column.isSorted
-                  ? column.isSortedDesc
-                    ? "sort-desc"
-                    : "sort-asc"
-                  : ""
-                }
-              >
-                {column.render("Header")} 
-                <i className="fas fa-sort"></i>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-      {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-           
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-              </tr>
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                // <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  className={
+                    column.isSorted
+                    ? column.isSortedDesc
+                      ? "sort-desc"
+                      : "sort-asc"
+                    : ""
+                  }
+                >
+                  {column.render("Header")} 
+                  <i className="fas fa-sort"></i>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+            prepareRow(row);
+            return (
             
-          );
-        })}
-      </tbody>
-    </table>
+                <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                  })}
+                </tr>
+              
+            );
+          })}
+        </tbody>
+      </table>
     </>  
   );
 }

@@ -61,9 +61,8 @@ function App() {
       }
     ], []
   )
-    console.log(countries[0]);
-  return (
-    
+
+  return (  
     <div className="App">
       <Table columns={columns} data={countries} />
     </div>
