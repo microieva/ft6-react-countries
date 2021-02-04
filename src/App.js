@@ -5,7 +5,6 @@ import Table from "./components/Table";
 import "./App.scss";
 
 const Languages = ({ languages }) => {
-  // Loop through the array and create a badge-like component instead of a comma-separated string
   return (
     <>
       {languages.map((lang, idx) => {
@@ -20,10 +19,8 @@ const Languages = ({ languages }) => {
 };
 
 function App() {
-  // data state to store the TV Maze API data. Its initial value is an empty array
   const [countries, setCountries] = useState([]);
 
-  // Using useEffect to call the API once mounted and set the data
   useEffect(() => {
     (async () => {
       const result = await axios('https://restcountries.eu/rest/v2/all');
@@ -36,9 +33,7 @@ function App() {
   const columns = useMemo(
     () => [
       {
-        // first group - TV Show
         Header: "Country",
-        // First group columns
         columns: [
           {
             Header: "Name",
