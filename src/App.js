@@ -33,8 +33,13 @@ function App() {
   const columns = useMemo(
     () => [
       {
-        Header: "Country",
+        Header: "Countries",
         columns: [
+          {
+            Header: "Flag",
+            accessor: "flag",
+            Cell: ({ cell: {value}}) => <img src={value} alt="country flag" />
+          },
           {
             Header: "Name",
             accessor: "name"
@@ -56,7 +61,7 @@ function App() {
       }
     ], []
   )
-
+    console.log(countries[0]);
   return (
     
     <div className="App">
