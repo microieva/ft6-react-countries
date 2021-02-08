@@ -32,9 +32,6 @@ function App() {
 
   const columns = useMemo(
     () => [
-      {
-        Header: "Countries",
-        columns: [
           {
             Header: "Flag",
             accessor: "flag",
@@ -57,8 +54,6 @@ function App() {
             Header: "Population",
             accessor: "population"
           },
-        ]
-      }
     ], []
   )
 
