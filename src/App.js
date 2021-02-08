@@ -30,32 +30,30 @@ function App() {
     
   }, []);
 
-  const columns = useMemo(
-    () => [
-          {
-            Header: "Flag",
-            accessor: "flag",
-            Cell: ({ cell: {value}}) => <img src={value} alt="country flag" />
-          },
-          {
-            Header: "Name",
-            accessor: "name"
-          },
-          {
-            Header: "Capital",
-            accessor: "capital"
-          },
-          {
-            Header: "Language(s)",
-            accessor: "languages",
-            Cell: ({ cell: { value } }) => <Languages languages={value} />
-          },
-          {
-            Header: "Population",
-            accessor: "population"
-          },
-    ], []
-  )
+  const columns = useMemo(() => [
+    {
+      Header: "Flag",
+      accessor: "flag",
+      Cell: ({ cell: {value}}) => <img src={value} alt="country flag" />
+    },
+    {
+      Header: "Name",
+      accessor: "name"
+    },
+    {
+      Header: "Capital",
+      accessor: "capital"
+    },
+    {
+      Header: "Language(s)",
+      accessor: "languages",
+      Cell: ({ cell: { value } }) => <Languages languages={value} />
+    },
+    {
+      Header: "Population",
+      accessor: "population"
+    },
+  ], [])
 
   return (  
     <div className="App">
