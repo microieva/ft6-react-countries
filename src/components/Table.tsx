@@ -25,7 +25,7 @@ export default function Table({ columns, data }) {
 
 
   return (
-    <>
+    <div>
       <SearchBar 
         filterInput={filterInput} 
         handleFilterChange={handleFilterChange}
@@ -68,6 +68,7 @@ export default function Table({ columns, data }) {
           })}
         </tbody>
       </table>
-    </>  
+    </div>  
   );
 }
+
