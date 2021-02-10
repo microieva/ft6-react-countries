@@ -1,33 +1,47 @@
-import { useState } from "react";
-import { useTable, useFilters, useSortBy } from "react-table";
+import { useState } from 'react';
+import { 
+  useTable, 
+  useFilters, 
+  useSortBy } from 'react-table';
+import { Column } from 'react-table';
 
+import { Country } from '../types';
 import SearchBar from './SearchBar';
 
-export default function Table({ columns, data }) {
-  const [filterInput, setFilterInput] = useState("");
+type TableProps = {
+  columns: Column<Country>[],
+  countries: Country[]
+}
+
+export default function Table({ columns, countries }: TableProps) {
+  const [filterInput, setFilterInput] = useState('')
   const {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
     headerGroups, // headerGroups, if your table has groupings
     rows, // rows for the table based on the data passed
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
-    setFilter,  
-  } = useTable({
-    columns,
-    data
-  }, useFilters, useSortBy);
+    setFilter, // The useFilter Hook provides a way to set the filter
+  } = useTable<Country>(
+    {
+      columns,
+      data: countries,
+    },
+    useFilters,
+    useSortBy
+  )
+  
 
-  const handleFilterChange = e => {
-    const value = e.target.value || undefined;
-    setFilter("name", value); 
-    setFilterInput(value);
-  };
-
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value
+    setFilter('name', value)
+    setFilterInput(value)
+  }
 
   return (
     <div>
-      <SearchBar 
-        filterInput={filterInput} 
+      <SearchBar
+        filterInput={filterInput}
         handleFilterChange={handleFilterChange}
       />
       <table {...getTableProps()}>
@@ -40,35 +54,34 @@ export default function Table({ columns, data }) {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className={
                     column.isSorted
-                    ? column.isSortedDesc
-                      ? "sort-desc"
-                      : "sort-asc"
-                    : ""
+                      ? column.isSortedDesc
+                        ? 'sort-desc'
+                        : 'sort-asc'
+                      : ''
                   }
                 >
-                  {column.render("Header")} 
-                  <i className="fas fa-sort"></i>
+                  {column.render('Header')}
+                  <i className='fas fa-sort'></i>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+          {rows.map((row, i) => {
             prepareRow(row);
             return (
-            
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                  })}
-                </tr>
-              
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                  );
+                })}
+              </tr>
             );
           })}
         </tbody>
       </table>
-    </div>  
+    </div>
   );
 }
-

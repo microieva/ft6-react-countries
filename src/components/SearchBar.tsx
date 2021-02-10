@@ -1,7 +1,10 @@
-import React from 'react';
 
-const SearchBar = ({filterInput, handleFilterChange}) => {
-    
+type SearchBarProps = {
+    filterInput: string,
+    handleFilterChange: ()=> void
+}
+
+const SearchBar = ({filterInput, handleFilterChange}: SearchBarProps) => {
     return (
         <>
             <input
