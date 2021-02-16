@@ -10,3 +10,7 @@ export type Language = {
     languages: Language[];
   };
   
+  export type InputProps = {
+    filterInput: string,
+    handleFilterChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined
+}

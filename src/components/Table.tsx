@@ -2,11 +2,20 @@ import { useState } from 'react';
 import { 
   useTable, 
   useFilters, 
-  useSortBy } from 'react-table';
-import { Column } from 'react-table';
+  useSortBy,
+  Column } from 'react-table';
+
+import CssBaseline from '@material-ui/core/CssBaseline'
+import MaUTable from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Button from "@material-ui/core/Button"
 
 import { Country } from '../types';
-import SearchBar from './SearchBar';
+import Header from './Header';
+import useStyles from '../hooks/useTableStyles';
 
 type TableProps = {
   columns: Column<Country>[],
@@ -30,7 +39,8 @@ export default function Table({ columns, countries }: TableProps) {
     useFilters,
     useSortBy
   )
-  
+
+  const classes = useStyles();
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value
@@ -40,17 +50,18 @@ export default function Table({ columns, countries }: TableProps) {
 
   return (
     <div>
-      <SearchBar
+      <Header 
         filterInput={filterInput}
         handleFilterChange={handleFilterChange}
       />
-      <table {...getTableProps()}>
-        <thead>
+      <MaUTable {...getTableProps()}>
+        <TableHead className={classes.headerRow}>
           {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <TableRow 
+              
+              {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                // <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-                <th
+                <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className={
                     column.isSorted
@@ -62,26 +73,37 @@ export default function Table({ columns, countries }: TableProps) {
                 >
                   {column.render('Header')}
                   <i className='fas fa-sort'></i>
-                </th>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
           {rows.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <TableRow className={classes.row} {...row.getRowProps()}>
                 {row.cells.map(cell => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    <TableCell 
+                      className={classes.cell}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render('Cell')}
+                      
+                    </TableCell>
+                    
                   );
                 })}
-              </tr>
+                <Button variant="contained" color="primary">
+                  Add
+                </Button> 
+                
+              </TableRow>
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </MaUTable>
     </div>
   );
 }

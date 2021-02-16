@@ -33,16 +33,20 @@ function App() {
       {
         Header: 'Population',
         accessor: 'population',
+        Cell: ({ cell: { value }}) => value.toString().split( /(?=(?:\d{3})+(?:\.|$))/g ).join(" ")
       },
     ],
     []
   );
 
   return (
+     
     <div className='App'>
-      {/* if error then <div>something went wrong</div> */}
-      <Table columns={columns} countries={countries} />
+      {error ? <div>try reloading..</div> :
+        <Table columns={columns} countries={countries} />  
+      }
     </div>
+    
   );
 }
 

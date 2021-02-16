@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "target": "es5",
     "lib": [
+      "es6",
       "dom",
       "dom.iterable",
       "esnext"
@@ -20,6 +24,7 @@
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true
   },
+
   "include": [
     "src"
   ]
